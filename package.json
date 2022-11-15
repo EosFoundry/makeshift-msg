@@ -1,6 +1,6 @@
 {
   "name": "@eos-makeshift/msg",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Inject color and spice into log messages",
   "main": "lib/makeshift-msg.umd.js",
   "module": "./lib/makeshift-msg.mjs",
@@ -31,8 +31,7 @@
     "url": "https://github.com/EosFoundry/makeshift-msg/issues"
   },
   "homepage": "https://github.com/EosFoundry/makeshift-msg#readme",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@rollup/plugin-commonjs": "^23.0.2",
     "@rollup/plugin-node-resolve": "^15.0.1",
