@@ -187,7 +187,6 @@ export class Msg {
   constructor(options: MsgOptions = defaultMsgOptions) {
     const finalOpts = defu(options, defaultMsgOptions)
     this.assignOptions(this, finalOpts)
-    console.log(`showtime! ${this.showTime}`)
     // if (options.symbol) {
     //   for (let prop in this._symbol) {
     //     this._symbol[prop] = options.symbol[prop]
