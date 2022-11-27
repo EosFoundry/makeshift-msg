@@ -1,12 +1,12 @@
 import { ChalkInstance } from 'chalk';
 export declare function filterName(input: any): any;
-export declare type MsgLevel = 'fatal' | 'error' | 'warn' | 'deviceEvent' | 'info' | 'debug';
+export declare type MsgLevel = 'fatal' | 'error' | 'warn' | 'info' | 'deviceEvent' | 'debug';
 export declare type LogLevel = 'none' | 'all' | MsgLevel;
 export declare const logRank: {
     all: number;
     debug: number;
-    info: number;
     deviceEvent: number;
+    info: number;
     warn: number;
     error: number;
     fatal: number;

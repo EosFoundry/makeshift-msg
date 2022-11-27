@@ -14,16 +14,16 @@ export type MsgLevel =
   'fatal'
   | 'error'
   | 'warn'
-  | 'deviceEvent'
   | 'info'
+  | 'deviceEvent'
   | 'debug'
 export type LogLevel = 'none' | 'all' | MsgLevel
 
 export const logRank = {
   'all': 0,
   'debug': 1,
-  'info': 2,
-  'deviceEvent': 3,
+  'deviceEvent': 2,
+  'info': 3,
   'warn': 4,
   'error': 5,
   'fatal': 98,
