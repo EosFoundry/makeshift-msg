@@ -85,6 +85,12 @@ export function setWarn(warnFn: ChalkInstance) {
 }
 
 export function strfy(o) { return JSON.stringify(o, null, 2) }
+function coerceString(maybeString) {
+  if (typeof maybeString === 'string') {
+    return maybeString
+  }
+  return nspct2(maybeString)
+}
 
 export function nspect(o: any, d: number): string {
   return inspect(o, {
@@ -207,7 +213,7 @@ export class Msg {
       let calledLevel = prop as MsgLevel
 
       this['_' + prop] = (l) => {
-        const logString = `${this.ps(calledLevel)}${l}`
+        let logString = `${this.ps(calledLevel)}${coerceString(l)}`
         if (logRank[this.logLevel] <= logRank[calledLevel]) {
           this.logger(logString, calledLevel)
         }
