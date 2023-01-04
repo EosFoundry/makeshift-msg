@@ -3,7 +3,7 @@
     "./src/*"
   ],
   "exclude": [
-    "./lib",
+    "./lib"
   ],
   "compilerOptions": {
     "module": "ESNext",
@@ -12,6 +12,6 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "declaration": true,
-    "declarationDir": "./lib/types",
-  },
+    "declarationDir": "./types"
+  }
 }

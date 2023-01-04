@@ -1,7 +1,7 @@
 import { ChalkInstance } from 'chalk';
 export declare function filterName(input: any): any;
-export declare type MsgLevel = 'fatal' | 'error' | 'warn' | 'info' | 'deviceEvent' | 'debug';
-export declare type LogLevel = 'none' | 'all' | MsgLevel;
+export type MsgLevel = 'fatal' | 'error' | 'warn' | 'info' | 'deviceEvent' | 'debug';
+export type LogLevel = 'none' | 'all' | MsgLevel;
 export declare const logRank: {
     all: number;
     debug: number;
@@ -15,14 +15,14 @@ export declare const logRank: {
 export interface Msger {
     logLevel: LogLevel;
 }
-export declare type LoggerFn = (msg: string, lv: LogLevel) => void;
-export declare type MsgLvFunctorMap = {
+export type LoggerFn = (msg: string, lv: LogLevel) => void;
+export type MsgLvFunctorMap = {
     [Property in MsgLevel]: Function;
 };
-export declare type MsgLvStringMap = {
+export type MsgLvStringMap = {
     [Property in MsgLevel]: string;
 };
-export declare type MsgOptions = {
+export type MsgOptions = {
     host?: string;
     logLevel?: LogLevel;
     logger?: Function;

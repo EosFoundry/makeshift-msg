@@ -1,7 +1,14 @@
-import typescript from 'rollup-plugin-typescript';
+import typescript from '@rollup/plugin-typescript'
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import terser from '@rollup/plugin-terser'
+
+// this is a workaround for 
+// https://github.com/rollup/plugins/issues/1253
+import { readFileSync } from 'fs';
+
+const tsconfig = JSON.parse(readFileSync('./tsconfig.json'))
+console.log(tsconfig)
 
 export default {
   input: './src/index.ts',
@@ -16,11 +23,11 @@ export default {
     },
   ],
   plugins: [
-    typescript({ tsconfig: './tsconfig.json' }),
-    nodeResolve({
-      exportConditions: ['node'],
-    }),
-    commonjs(),
-    terser()
+    // nodeResolve({
+    //   exportConditions: ['node'],
+    // }),
+    typescript(tsconfig),
+    // commonjs(),
+    // terser()
   ]
 };
