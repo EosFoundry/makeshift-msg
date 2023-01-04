@@ -1,6 +1,6 @@
 {
   "name": "@eos-makeshift/msg",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Inject color and spice into log messages",
   "main": "lib/makeshift-msg.umd.js",
   "module": "./lib/makeshift-msg.mjs",
