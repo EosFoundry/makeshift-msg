@@ -23,11 +23,11 @@ export default {
     },
   ],
   plugins: [
-    // nodeResolve({
-    //   exportConditions: ['node'],
-    // }),
+    nodeResolve({
+      exportConditions: ['node'],
+    }),
     typescript(tsconfig),
-    // commonjs(),
-    // terser()
+    commonjs(),
+    terser()
   ]
 };
