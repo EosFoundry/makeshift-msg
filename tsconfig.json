@@ -9,7 +9,7 @@
     "module": "ESNext",
     "target": "ESNext",
     "resolveJsonModule": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "declarationDir": "./types"
