@@ -15,20 +15,29 @@ export type MsgLevel =
   | 'error'
   | 'warn'
   | 'info'
-  | 'deviceEvent'
+  | 'verbose'
   | 'debug'
+
 export type LogLevel = 'none' | 'all' | MsgLevel
 
-export const logRank = {
-  'all': 0,
-  'debug': 1,
-  'deviceEvent': 2,
-  'info': 3,
-  'warn': 4,
-  'error': 5,
-  'fatal': 98,
-  'none': 99,
-}
+export const logLevels: LogLevel[] = [
+  'all',
+  'debug',
+  'verbose',
+  'info',
+  'warn',
+  'error',
+  'fatal',
+  'none',
+]
+
+
+
+export const logRank = logLevels.reduce((acc, cur, idx) => {
+  acc[cur] = idx
+  return acc
+}, {} as { [key: string]: number })
+
 export interface Msger {
   logLevel: LogLevel
 }
@@ -59,8 +68,8 @@ export const defaultMsgOptions: MsgOptions = {
   showTime: false,
   symbol: {
     debug: 'dbg',
+    verbose: '',
     info: '',
-    deviceEvent: '',
     warn: '(!)',
     error: '[!]',
     fatal: '{x_X}',
@@ -70,8 +79,8 @@ export const defaultMsgOptions: MsgOptions = {
 
 const colorize: MsgLvFunctorMap = {
   debug: chalk.gray,
+  verbose: chalk.gray,
   info: chalk.white,
-  deviceEvent: chalk.green,
   warn: chalk.yellow,
   error: chalk.red,
   fatal: chalk.redBright,
@@ -106,17 +115,16 @@ export function nspct2(o: any): string {
   } as InspectOptions)
 }
 export class Msg {
-
   private _debug = () => { }
+  private _verbose = () => { }
   private _info = () => { }
-  private _deviceEvent = () => { }
   private _warn = () => { }
   private _error = () => { }
-  private _fatal = () => { }
+  private _fatal = () => { };
+
   private _defaultLogger(msg: string, lv: LogLevel) {
     console.log(msg);
   }
-
 
   prompt: string = ' => '
   host: string = ''
@@ -125,24 +133,12 @@ export class Msg {
   showTime: boolean = false
   showMillis: boolean = false
   get time() {
-    const d = new Date()
-    let hh = '', mm = '', ss = '';
-    if (d.getHours() < 10) {
-      hh = '0'
-    }
-    if (d.getMinutes() < 10) {
-      mm = '0'
-    }
-    if (d.getSeconds() < 10) {
-      ss = '0'
-    }
-    hh += d.getHours()
-    mm += d.getMinutes()
-    ss += d.getSeconds()
-
-
+    const date = new Date()
+    const hh = date.getHours().toString().padStart(2, '0');
+    const mm = date.getMinutes().toString().padStart(2, '0');
+    const ss = date.getSeconds().toString().padStart(2, '0');
     let tt = hh + ':' + mm + ':' + ss
-    if (this.showMillis) { tt += ':' + d.getMilliseconds() }
+    if (this.showMillis) { tt += ':' + date.getMilliseconds() }
     return chalk.grey(tt)
   }
 
@@ -161,6 +157,7 @@ export class Msg {
     return _ps
   }
 
+  //
   symbol: MsgLvStringMap
 
   private assignOptions(setting, givenOptions) {
@@ -179,8 +176,8 @@ export class Msg {
   getLevelLoggers(): MsgLvFunctorMap {
     return {
       debug: this._debug,
+      verbose: this._verbose,
       info: this._info,
-      deviceEvent: this._deviceEvent,
       warn: this._warn,
       error: this._error,
       fatal: this._fatal,
